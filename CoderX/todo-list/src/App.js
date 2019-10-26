@@ -7,7 +7,12 @@ class App extends Component {
   // eslint-disable-next-line
   constructor(props) {
     super(props);
-    this.todoItems = ["go to market", "learn UI/UX"];
+    this.todoItems = [
+      { title: "go to market", isComplete: true },
+      { title: "go to market", isComplete: true },
+
+      { title: "learn UI/UX" }
+    ];
   }
 
   render() {
@@ -16,7 +21,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           {this.todoItems.map((item, index) => (
-            <TodoItem key={index} title={item} />
+            <TodoItem key={index} item={item} />
           ))}
           <p>
             Edit <code>src/App.js</code> and save to reload.
