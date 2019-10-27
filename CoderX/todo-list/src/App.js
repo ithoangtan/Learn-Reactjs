@@ -8,10 +8,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.todoItems = [
-      { title: "go to market", isComplete: true },
-      { title: "go to market", isComplete: true },
-
-      { title: "learn UI/UX" }
+      // { title: "go to market", isComplete: true },
+      // { title: "go to market", isComplete: true },
+      // { title: "learn UI/UX" }
     ];
   }
 
@@ -20,9 +19,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          {this.todoItems.map((item, index) => (
-            <TodoItem key={index} item={item} />
-          ))}
+          {this.todoItems.length > 0 &&
+            this.todoItems.map((item, index) => (
+              <TodoItem key={index} item={item} />
+            ))}
+          {this.todoItems.length === 0 && "Nothing here!!!"}
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
