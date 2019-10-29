@@ -7,23 +7,48 @@ class App extends Component {
   // eslint-disable-next-line
   constructor(props) {
     super(props);
-    this.todoItems = [
-      // { title: "go to market", isComplete: true },
-      // { title: "go to market", isComplete: true },
-      // { title: "learn UI/UX" }
-    ];
+    this.state = {
+      todoItems: [
+        { title: "go to market", isComplete: true },
+        { title: "go to market", isComplete: true },
+        { title: "learn UI/UX" }
+      ]
+    };
+  }
+
+  onItemClicked(item) {
+    return event => {
+      const isComplete = item.isComplete;
+      const { todoItems } = this.state;
+      const index = todoItems.indexOf(item);
+      this.setState({
+        todoItems: [
+          ...todoItems.slice(0, index),
+          {
+            ...item,
+            isComplete: !isComplete
+          },
+          ...todoItems.slice(index + 1)
+        ]
+      });
+    };
   }
 
   render() {
+    const { todoItems } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          {this.todoItems.length > 0 &&
-            this.todoItems.map((item, index) => (
-              <TodoItem key={index} item={item} />
+          {todoItems.length &&
+            todoItems.map((item, index) => (
+              <TodoItem
+                key={index}
+                item={item}
+                onItemClick={this.onItemClicked(item)}
+              />
             ))}
-          {this.todoItems.length === 0 && "Nothing here!!!"}
+          {/* {this.todoItems.length === 0 && "Nothing here!!!"} */}
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
