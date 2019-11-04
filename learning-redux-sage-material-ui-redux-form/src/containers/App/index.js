@@ -1,23 +1,19 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import styles from "./styles";
+
 import { withStyles } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core/styles";
+
+import styles from "./styles";
+import theme from "../../commons/theme";
+import Taskboard from "../Taskboard";
 
 class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className="App">
-        <p> Hello redux-saga</p>
-        <Button variant="contained" color="primary">
-          Material Button
-        </Button>
-        <div className={classes.box}>
-          <div className={classes.shape}>Angular</div>
-          <div className={classes.shape}>React</div>
-          <div className={classes.shape}>Vue</div>
-        </div>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Taskboard />
+      </ThemeProvider>
     );
   }
 }
