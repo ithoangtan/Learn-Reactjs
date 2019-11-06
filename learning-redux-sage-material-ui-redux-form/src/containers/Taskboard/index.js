@@ -8,6 +8,7 @@ import { STATUSES } from "../../constants/index";
 import { Grid, Button } from "@material-ui/core";
 
 import TaskList from "./../../components/TaskList/index";
+import TaskForm from "./../../components/TaskForm/index";
 
 const listTask = [
   { id: 1, title: "Read book", description: "Read material book", status: 0 },
@@ -16,6 +17,10 @@ const listTask = [
 ];
 
 class TaskBoard extends Component {
+  state = {
+    open: false
+  };
+
   renderBoard() {
     let xhtml = null;
     xhtml = (
@@ -38,14 +43,39 @@ class TaskBoard extends Component {
     return xhtml;
   }
 
+  handleCloseForm = () => {
+    this.setState({
+      open: false
+    });
+  };
+
+  renderForm() {
+    let xhtml = null;
+    const { open } = this.state;
+    xhtml = <TaskForm open={open} onClose={this.handleCloseForm}></TaskForm>;
+    return xhtml;
+  }
+
+  addNewTaskOpenForm = () => {
+    this.setState({
+      open: true
+    });
+  };
+
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.taskBoard}>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.addNewTaskOpenForm}
+        >
           <AddIcon /> Thêm mới công việc
         </Button>
         {this.renderBoard()}
+        {this.renderForm()}
       </div>
     );
   }
