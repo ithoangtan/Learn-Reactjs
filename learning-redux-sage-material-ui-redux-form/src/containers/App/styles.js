@@ -5,8 +5,7 @@ const styles = () => ({
   },
   shape: {
     padding: "20px",
-    margin: "10px",
-    backgroundColor: "red"
+    margin: "10px"
   }
 });
 
