@@ -8,13 +8,13 @@ import theme from "../../commons/theme";
 import Taskboard from "../Taskboard";
 
 class App extends Component {
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <Taskboard />
-      </ThemeProvider>
-    );
-  }
+   render() {
+      return (
+         <ThemeProvider theme={theme}>
+            <Taskboard />
+         </ThemeProvider>
+      );
+   }
 }
 
 export default withStyles(styles)(App);
