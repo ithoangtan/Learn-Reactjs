@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import rootReducer from "./../reducers/index.reducer";
+import thunk from "redux-thunk";
 
 const composeEnhancers =
    process.env.NODE_ENV !== "production" &&
@@ -10,6 +11,7 @@ const composeEnhancers =
 
 const configStore = () => {
    const middlewares = [
+      thunk
       //Danh sách các middleware ở đây
    ];
    const enhancers = [applyMiddleware(...middlewares)];
