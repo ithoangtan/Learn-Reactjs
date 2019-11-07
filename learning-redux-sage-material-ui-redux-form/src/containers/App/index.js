@@ -8,7 +8,7 @@ import { withStyles } from "@material-ui/core";
 import styles from "./styles";
 import theme from "../../commons/theme";
 import { ThemeProvider } from "@material-ui/styles";
-import Taskboard from "../Taskboard";
+import Taskboard from "../Taskboard/index.taskBoard";
 
 const store = configStore();
 
