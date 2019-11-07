@@ -7,8 +7,8 @@ import AddIcon from "@material-ui/icons/Add";
 import { STATUSES } from "../../constants/index";
 import { Grid, Button } from "@material-ui/core";
 
-import TaskList from "./../../components/TaskList/index";
-import TaskForm from "./../../components/TaskForm/index";
+import TaskList from "../../components/TaskList/index";
+import TaskForm from "../../components/TaskForm/index";
 
 const listTask = [
    { id: 1, title: "Read book", description: "Read material book", status: 0 },
