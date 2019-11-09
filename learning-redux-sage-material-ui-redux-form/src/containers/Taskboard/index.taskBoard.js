@@ -80,6 +80,7 @@ class TaskBoard extends Component {
             >
                <AddIcon /> Thêm mới công việc
             </Button>
+
             {this.renderBoard()}
             {this.renderForm()}
          </div>
