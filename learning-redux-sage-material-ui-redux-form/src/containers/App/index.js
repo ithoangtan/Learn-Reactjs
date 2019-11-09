@@ -10,6 +10,9 @@ import theme from "../../commons/theme";
 import { ThemeProvider } from "@material-ui/styles";
 import Taskboard from "../Taskboard/index.taskBoard";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+
 const store = configStore();
 
 class App extends Component {
@@ -18,6 +21,7 @@ class App extends Component {
          <Provider store={store}>
             <ThemeProvider theme={theme}>
                <Taskboard />
+               <ToastContainer />
             </ThemeProvider>
          </Provider>
       );
