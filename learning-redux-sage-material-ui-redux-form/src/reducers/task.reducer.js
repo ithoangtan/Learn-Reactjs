@@ -1,5 +1,5 @@
 import * as taskConstants from "./../constants/task.module";
-import { toastError } from "../helper/toastify.helper";
+import { toastError, toastSuccess } from "../helper/toastify.helper";
 const initialState = {
    listTask: []
 };
@@ -13,6 +13,7 @@ const reducer = (state = initialState, action) => {
          };
       case taskConstants.FETCH_TASK_SUCCESS: {
          const { data } = action.payload;
+         toastSuccess(data);
          return {
             ...state,
             listTask: data

@@ -7,3 +7,9 @@ export const toastError = error => {
       toast.error(error.message);
    }
 };
+
+export const toastSuccess = data => {
+   if (data !== null && data !== "") {
+      toast.success(`${data.length} tasks được up luôn nha mí bạn`);
+   }
+};
