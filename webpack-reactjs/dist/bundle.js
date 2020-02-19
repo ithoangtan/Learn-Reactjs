@@ -86,6 +86,29 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/image.css":
+/*!***********************!*\
+  !*** ./src/image.css ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./src/image.css?");
+
+/***/ }),
+
+/***/ "./src/image.js":
+/*!**********************!*\
+  !*** ./src/image.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\n__webpack_require__(/*! ./image.css */ \"./src/image.css\");\n\nvar image = document.createElement(\"img\");\nimage.src = \"https://loremflickr.com/g/120/80/dog\";\ndocument.body.appendChild(image);\n\n//# sourceURL=webpack:///./src/image.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -94,7 +117,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _math = __webpack_require__(/*! ./math */ \"./src/math.js\");\n\nvar _math2 = _interopRequireDefault(_math);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// const sum = require(\"./math\");\n\nvar total = (0, _math2.default)(3, 5);\nconsole.log(total);\ndocument.write(total);\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\nvar _math = __webpack_require__(/*! ./math */ \"./src/math.js\");\n\nvar _math2 = _interopRequireDefault(_math);\n\n__webpack_require__(/*! ./image */ \"./src/image.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// const sum = require(\"./math\");\n\nvar total = (0, _math2.default)(3, 5);\nconsole.log(total);\ndocument.write(total);\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
