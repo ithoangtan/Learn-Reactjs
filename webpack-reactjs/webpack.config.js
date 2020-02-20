@@ -1,24 +1,71 @@
-const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VENDOR_LIBS = [
+    'axios',
+    'bootstrap',
+    'jquery',
+    'react',
+    'react-dom',
+    'react-redux',
+    'react-router-dom',
+    'redux',
+    'redux-thunk'
+];
+const devServer = {
+    port : 4000,
+    open : true,
+    disableHostCheck : true,
+    historyApiFallback : true,
+    overlay : true,
+    stats : 'minimal',
+    inline : true,
+    compress : true,
+    contentBase : '/'
+};
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
-  },
-  module: {
-    rules: [
-      { use: "babel-loader", test: /\.js$/ },
-      {
-        use: ExtractTextPlugin.extract({
-          use: "css-loader",
-          fallback: "style-loader"
+    entry: {
+        bundle: './src/index.js',
+        vendor: VENDOR_LIBS
+    },
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: '[name].[chunkhash].js'
+    },
+    module: {
+        rules: [
+            {
+                use: 'babel-loader',
+                test: /\.js$/,
+                exclude: '/node_modules/'
+            },
+            {
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ],
+                test: /\.css$/
+            },
+            {
+                loader: 'file-loader',
+                test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2$|\.eot$|\.ttf$|\.wav$|\.mp3$|\.ico$/
+            }
+        ]
+    },
+    plugins : [
+        new webpack.ProvidePlugin({
+            '$' : 'jquery',
+            'jQuery' : 'jquery',
+            'window.$' : 'jquery',
+            'window.jQuery' : 'jquery'
         }),
-        test: /\.css$/
-      }
-    ]
-  },
-  plugins: [new ExtractTextPlugin("style.css")]
-};
+        new webpack.optimize.CommonsChunkPlugin({
+            names : ['vendor', 'manifest']
+        }),
+        new HtmlWebpackPlugin({
+            template : 'src/index.html'
+        })
+    ],
+    devServer
+}

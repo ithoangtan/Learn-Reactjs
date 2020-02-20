@@ -1,7 +1,23 @@
-import sum from "./math";
-import "./image";
-// const sum = require("./math");
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App/App';
+import { createStore, applyMiddleware } from 'redux';
+import appReducers from './reducers/index';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'jquery';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
-const total = sum(3, 5);
-console.log(total);
-document.write(total);
+const store = createStore(
+    appReducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(thunk)
+);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    document.getElementById('root')
+);
