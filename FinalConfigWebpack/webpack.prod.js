@@ -14,9 +14,6 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "style-loader"
-          },
-          {
             loader: "css-loader"
           },
           {
