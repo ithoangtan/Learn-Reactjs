@@ -10,6 +10,11 @@ module.exports = {
     //:mindblow: I wasted more than 2 days until realize
     // this was the line most important in all this guide.
   },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9999
+  },
   module: {
     rules: [
       {
@@ -17,6 +22,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: "babel-loader",
         exclude: [/node_modules/] // nó sẽ không tìm trong folder /node_modules
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2$|\.eot$|\.ttf$|\.wav$|\.mp3$|\.ico$/,

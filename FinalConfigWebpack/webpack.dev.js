@@ -22,7 +22,7 @@ module.exports = merge(common, {
     // các file scss được loader bởi style-loader, css-loader, sass-loader
     rules: [
       {
-        test: /\.(css|less)$/,
+        test: /\.(less)$/,
         use: [
           {
             loader: "style-loader"
@@ -42,6 +42,29 @@ module.exports = merge(common, {
               },
               javascriptEnabled: true
             }
+          }
+        ]
+      },
+      {
+        test: /\.(scss)$/,
+        use: [
+          {
+            loader: "style-loader" // inject CSS to page
+          },
+          {
+            loader: "css-loader" // translates CSS into CommonJS modules
+          },
+          {
+            loader: "postcss-loader", // Run post css actions
+            options: {
+              plugins: function() {
+                // post css plugins, can be exported to postcss.config.js
+                return [require("precss"), require("autoprefixer")];
+              }
+            }
+          },
+          {
+            loader: "sass-loader" // compiles Sass to CSS
           }
         ]
       }
