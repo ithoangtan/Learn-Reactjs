@@ -10,8 +10,29 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(scss|sass)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        test: /\.(css|less)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "less-loader",
+            options: {
+              modifyVars: {
+                "primary-color": "#1DA57A",
+                "link-color": "#1DA57A",
+                "border-radius-base": "2px"
+                // or
+                // hack: `true; @import "./src/index.less";` // Override with less file
+              },
+              javascriptEnabled: true
+            }
+          }
+        ]
       }
     ]
   },
@@ -22,7 +43,7 @@ module.exports = merge(common, {
     }),
     // nó sẽ minify file css
     new MiniCssExtractPlugin({
-      filename: "css/index.css"
+      filename: "index.css"
     }),
     new HtmlWebpackPlugin({
       title: "Webpack React Example",
