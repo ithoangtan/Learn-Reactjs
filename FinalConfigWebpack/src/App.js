@@ -1,9 +1,16 @@
 import React from "react";
 import { DatePicker, message, Button } from "antd";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
+
+library.add(fab, faCheckSquare, faCoffee); //Để sử dụng lại ở đâu đó mà không cần phải import lại
+// đơn giản chỉ cần:  <FontAwesomeIcon icon="check-square" />
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 
 class App extends React.Component {
   state = {
@@ -26,70 +33,17 @@ class App extends React.Component {
           </div>
         </div>
         <div className="container">
-          <div className="row">
-            <div className="col d-flex flex-row">
-              <div className="top_bar_contact_item">
-                <div className="top_bar_icon">
-                  <img src="images/phone.png" alt="" />
-                  +38 068 005 3570
-                </div>
-                <div className="top_bar_contact_item">
-                  <div className="top_bar_icon">
-                    <img src="images/mail.png" alt="" />
-                    <a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
-                  </div>
-                  <div className="top_bar_content ml-auto">
-                    <div className="top_bar_menu">
-                      <ul className="standard_dropdown top_bar_dropdown">
-                        <li>
-                          <a href="#">
-                            English<i className="fas fa-chevron-down"></i>
-                          </a>
-                          <ul>
-                            <li>
-                              <a href="#">Italian</a>
-                            </li>
-                            <li>
-                              <a href="#">Spanish</a>
-                            </li>
-                            <li>
-                              <a href="#">Japanese</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#">
-                            $ US dollar<i className="fas fa-chevron-down"></i>
-                          </a>
-                          <ul>
-                            <li>
-                              <a href="#">EUR Euro</a>
-                            </li>
-                            <li>
-                              <a href="#">GBP British Pound</a>
-                            </li>
-                            <li>
-                              <a href="#">JPY Japanese Yen</a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="top_bar_user">
-                      <div className="user_icon">
-                        <img src="images/user.svg" alt="" />
-                        <div>
-                          <a href="#">Register</a>
-                        </div>
-                        <div>
-                          <a href="#">Sign in</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="alert alert-primary" role="alert">
+            <FontAwesomeIcon icon={faCoffee} /> A simple primary alert—check it
+            out!
+          </div>
+          <div className="alert alert-secondary" role="alert">
+            <FontAwesomeIcon icon={["fab", "apple"]} /> A simple secondary
+            alert—check it out!
+          </div>
+          <div className="alert alert-success" role="alert">
+            <FontAwesomeIcon icon="check-square" /> A simple success alert—check
+            it out!
           </div>
         </div>
       </>

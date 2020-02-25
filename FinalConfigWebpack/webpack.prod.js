@@ -3,6 +3,7 @@ const common = require("./webpack.common.js");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
@@ -10,7 +11,7 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(css|less)$/,
+        test: /\.(less)$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -30,6 +31,29 @@ module.exports = merge(common, {
             }
           }
         ]
+      },
+      {
+        test: /\.(scss)$/,
+        use: [
+          {
+            loader: "style-loader" // inject CSS to page
+          },
+          {
+            loader: "css-loader" // translates CSS into CommonJS modules
+          },
+          {
+            loader: "postcss-loader", // Run post css actions
+            options: {
+              plugins: function() {
+                // post css plugins, can be exported to postcss.config.js
+                return [require("precss"), require("autoprefixer")];
+              }
+            }
+          },
+          {
+            loader: "sass-loader" // compiles Sass to CSS
+          }
+        ]
       }
     ]
   },
@@ -42,6 +66,8 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: "index.css"
     }),
+    //AntdDayjsWebpackPlugin Thay thế moment.js cho nó nhẹ hơn xí
+    new AntdDayjsWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Webpack React Example",
       inject: false,
