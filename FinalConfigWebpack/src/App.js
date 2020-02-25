@@ -10,6 +10,7 @@ library.add(fab, faCheckSquare, faCoffee); //Để sử dụng lại ở đâu �
 // đơn giản chỉ cần:  <FontAwesomeIcon icon="check-square" />
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 class App extends React.Component {
@@ -20,6 +21,7 @@ class App extends React.Component {
   handleChange = date => {
     message.info(`Selected Date: ${date ? date.format("YYYY-MM-DD") : "None"}`);
     this.setState({ date });
+    console.log("a");
   };
   render() {
     const { date } = this.state;

@@ -95,7 +95,14 @@ module.exports = merge(common, {
     new webpack.NormalModuleReplacementPlugin(
       /node_modules\/antd\/lib\/style\/index\.less/,
       path.resolve(__dirname, "/src/index.less")
-    )
+    ),
     // #antd { @import '~antd/es/style/core/index.less'; @import '~antd/es/style/themes/default.less'; }
+
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.$": "jquery",
+      "window.jQuery": "jquery"
+    })
   ]
 });
