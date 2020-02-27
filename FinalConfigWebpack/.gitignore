@@ -1,5 +1,21 @@
 .DS_STORE
-node_modules
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+
 scripts/flow/*/.flowconfig
 *~
 *.pyc
@@ -23,8 +39,10 @@ chrome-user-data
 *.swp
 *.swo
 
-#production
-/dist
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build

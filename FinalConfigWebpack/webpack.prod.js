@@ -3,6 +3,7 @@ const common = require("./webpack.common.js");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
@@ -10,8 +11,49 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(scss|sass)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        test: /\.(less)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "less-loader",
+            options: {
+              modifyVars: {
+                "primary-color": "#1DA57A",
+                "link-color": "#1DA57A",
+                "border-radius-base": "2px"
+                // or
+                // hack: `true; @import "./src/index.less";` // Override with less file
+              },
+              javascriptEnabled: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(scss)$/,
+        use: [
+          {
+            loader: "style-loader" // inject CSS to page
+          },
+          {
+            loader: "css-loader" // translates CSS into CommonJS modules
+          },
+          {
+            loader: "postcss-loader", // Run post css actions
+            options: {
+              plugins: function() {
+                // post css plugins, can be exported to postcss.config.js
+                return [require("precss"), require("autoprefixer")];
+              }
+            }
+          },
+          {
+            loader: "sass-loader" // compiles Sass to CSS
+          }
+        ]
       }
     ]
   },
@@ -22,8 +64,10 @@ module.exports = merge(common, {
     }),
     // nó sẽ minify file css
     new MiniCssExtractPlugin({
-      filename: "css/index.css"
+      filename: "index.css"
     }),
+    //AntdDayjsWebpackPlugin Thay thế moment.js cho nó nhẹ hơn xí
+    new AntdDayjsWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Webpack React Example",
       inject: false,
