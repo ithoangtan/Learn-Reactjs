@@ -1,32 +1,19 @@
-const path = require("path");
-const webpack = require("webpack");
 const merge = require("webpack-merge");
-const common = require("./webpack.common");
+const common = require("./webpack.common.js");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 
-// nó ghép với file webpack`webpack.common.js` đã cấu hình cơ bản để sử dụng.
 module.exports = merge(common, {
-  // môi trường : development
-  mode: "development",
-
-  // Nó sẽ hiển thị lỗi ở đâu (vì khi lỗi nó sẽ hiển thị ở file đã build trong folder dist
-  // mà khi build là cú pháp Js5 cái ta cần là chính xác lỗi chỗ nào,
-  // đó là lý do bạn nên để 'inline-source-map'
-  devtool: "inline-source-map",
-  devServer: {
-    contentBase: "./dist",
-    hot: true
-  },
+  mode: "production",
+  devtool: "source-map",
   module: {
-    // các file scss được loader bởi style-loader, css-loader, sass-loader
     rules: [
       {
         test: /\.(less)$/,
         use: [
-          {
-            loader: "style-loader"
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader"
           },
@@ -70,21 +57,15 @@ module.exports = merge(common, {
       }
     ]
   },
-  watch: true,
   plugins: [
-  //tiến trình bundle
-    new webpack.ProgressPlugin({
-      handler(percentage, message, ...args) {
-        // e.g. Output each progress message directly to the console:
-        console.info(percentage, message, ...args);
-      }
+    // nó sẽ clean thư mục`dist/js & dist/css` trước khi build
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ["dist"]
     }),
-    // new webpack.SourceMapDevToolPlugin({
-    //   filename: "[name].js.map",
-    //   exclude: ["vendor.js"]
-    // }),
-    //HotModuleReplacementPlugin: nó giúp tạo ra server riêng tự động reload khi có bất kỳ thay đổi nào từ các file hệ client của project/
-    new webpack.HotModuleReplacementPlugin(),
+    // nó sẽ minify file css
+    new MiniCssExtractPlugin({
+      filename: "index.css"
+    }),
     //AntdDayjsWebpackPlugin Thay thế moment.js cho nó nhẹ hơn xí
     new AntdDayjsWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -99,21 +80,8 @@ module.exports = merge(common, {
       ],
       mobile: true,
       lang: "en-US",
-      bodyHtmlSnippet: '<div id="root"></div>'
-    }),
-    //antd
-
-    new webpack.NormalModuleReplacementPlugin(
-      /node_modules\/antd\/lib\/style\/index\.less/,
-      path.resolve(__dirname, "/src/index.less")
-    ),
-    // #antd { @import '~antd/es/style/core/index.less'; @import '~antd/es/style/themes/default.less'; }
-
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.$": "jquery",
-      "window.jQuery": "jquery"
+      bodyHtmlSnippet: '<div id="root"></div>',
+      filename: "index.html"
     })
   ]
 });
